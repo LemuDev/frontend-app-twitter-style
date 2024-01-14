@@ -6,6 +6,7 @@ import { ProtectedRoutes } from './components/ProtectedRoutes'
 
 import {getToken} from './services/token'
 import { useEffect, useState } from 'react'
+import { Register } from './pages/Register'
 
 
 
@@ -20,8 +21,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='login' element={<Login />}/>
-        
+        <Route path='/login' element={<Login />}/>
+        <Route path='/register' element={<Register />}/>
+
+        {/* Privates Routes */}
         <Route path='/' element = { 
             <ProtectedRoutes token={token }> 
               <Home/> 
