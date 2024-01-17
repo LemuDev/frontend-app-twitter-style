@@ -1,9 +1,14 @@
 import { useForm } from "react-hook-form";
 import { RegisterSchemaType } from "../types/register";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { registerSchema } from "../schemas/register";
+
+
 import { useState } from "react";
 import LoaderButton from "../components/LoaderButton";
+import { registerServices } from "../services/register";
+
 
 export function Register() {
 
@@ -16,12 +21,20 @@ export function Register() {
   });
 
   const [loading, setLoading] = useState(false)
+  const [emailError, setEmailError] = useState(null)
 
-
-  const OnSubmit = async () => {
+  const OnSubmit = async (data: RegisterSchemaType) => {
     await setLoading(true)
-    console.log("DDDDDDDDDDDDDD")
+  
+    const res = await registerServices(data)
+    if(res.error != undefined){
+      setEmailError(res.error)
+    }else{
+      setEmailError(null)
+    }
+
     await setLoading(false)
+
   }
 
   return (
@@ -56,8 +69,7 @@ export function Register() {
 
       <div className="my-3">
         <label>last Name</label>
-        <input type="text" 
-          {...register('last_name')}
+        <input type="text" {...register('last_name')}
           className="
             bg-gray-100 border border-gray-300 
             text-gray-900 
@@ -77,8 +89,7 @@ export function Register() {
 
       <div className="my-3">
         <label>Email</label>
-        <input type="text" 
-          {...register('email')}
+        <input type="email" {...register('email')}
           className="
             bg-gray-100 border border-gray-300 
             text-gray-900 
@@ -93,6 +104,12 @@ export function Register() {
           errors.email?
             <span className="block text-sm pt-1 mb-1 text-red-600">{errors.email?.message}</span>
             :null
+        }
+
+        {
+          emailError ?
+            <span className="block text-sm pt-1 mb-1 text-red-600">{ emailError }</span>
+          :null
         }
       </div>
 
@@ -119,7 +136,7 @@ export function Register() {
 
       <div className="my-3">
         <label>Confirm Password</label>
-        <input type="text" 
+        <input type="password" 
           {...register('confirm')}
           className="
             bg-gray-100 border border-gray-300 
