@@ -1,26 +1,24 @@
-import { ReactNode, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { ReactNode } from 'react'
+import { Navigate } from 'react-router-dom';
+import { getToken } from '../services/token';
 
 type Props = {
-  token: string,
   children: ReactNode
 }
 
 export function ProtectedRoutes(props: Props) {
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        if(props.token == ""){
-            navigate("/login")
-            return;
-        }
-    })
+    const token = getToken()
+
+    if(token == ""){ 
+        return <Navigate to={'/login'}></Navigate>
+    }
+
     
-
     return (
         <>
             {
-                props.token != ""?
+                token != ""?
                     props.children
                 :null
             }
