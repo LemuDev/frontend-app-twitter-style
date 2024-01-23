@@ -28,15 +28,15 @@ function Login() {
 
   const onSubmit = async (data: LoginSchemaType)=>{
     if(!loading){
-      await setLoading(true)
+      setLoading(true)
       await LoginServices(data)
-      await setLoading(false)
+      setLoading(false)
       
       const token: string = await getToken()
       
       console.log(token)
 
-      if(await token.length >= 1){
+      if(token.length >= 1){
         navigate("/")
       }
 

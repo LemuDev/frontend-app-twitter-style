@@ -24,16 +24,17 @@ export function Register() {
   const [emailError, setEmailError] = useState(null)
 
   const OnSubmit = async (data: RegisterSchemaType) => {
-    await setLoading(true)
+    setLoading(true)
   
     const res = await registerServices(data)
+    
     if(res.error != undefined){
       setEmailError(res.error)
     }else{
       setEmailError(null)
     }
 
-    await setLoading(false)
+    setLoading(false)
 
   }
 
