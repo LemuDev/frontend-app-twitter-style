@@ -1,13 +1,17 @@
+import { useState } from 'react';
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form';
 
-import { LoginSchema } from '../../schemas/login.ts';
-import { LoginServices } from '../../services/login.ts'
-import { LoginSchemaType } from '../../types/login.ts';
-import { useState } from 'react';
-import LoaderButton from '../LoaderButton.tsx';
+import { LoginSchema } from '../../schemas/login';
+import { LoginServices } from '../../services/login'
+import { LoginSchemaType } from '../../types/login';
+
 import { useNavigate } from 'react-router-dom';
-import { getToken } from '../../services/token.ts';
+
+import { getToken } from '../../services/token';
+
+import LoaderButton from '../LoaderButton';
 
 export function FormLogin() {
     const navigate = useNavigate()
