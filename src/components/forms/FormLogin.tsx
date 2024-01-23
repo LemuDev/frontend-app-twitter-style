@@ -96,19 +96,7 @@ export function FormLogin() {
             
             </div>
 
-            <button 
-            type="submit" 
-            className={
-                !loading?
-                "flex justify-center items-center w-full p-3 text-center bg-sky-600 hover:bg-sky-700 transition-colors duration-200 text-gray-100 cursor-pointer rounded"
-                :
-                "flex justify-center items-center w-full p-3 text-center bg-blue-400 transition-colors duration-200 text-gray-100 rounded cursor-not-allowed"
-            }
-
-            >
-            <b>Log In</b>
-            <LoaderButton loading={loading}/>
-            </button>
+            <LoaderButton loading={loading} value="Log In" />
         </form>
     )
 }
